@@ -1,11 +1,7 @@
 #include "activity4.h"
 
 int i = 0;
-/**
- * @brief initializing USART communication
- *
- * @param baud_rate to set the baud rate.
- */
+
 void Init_USART(uint16_t baud_rate){
     /*Seting the required Baud rate*/
     UBRR0L = baud_rate;
@@ -15,10 +11,7 @@ void Init_USART(uint16_t baud_rate){
     /*receiver and transmitter enabled*/
     UCSR0B = (1<<RXEN0) | (1<<TXEN0) | (1<<RXCIE0) | (1<<TXCIE0);
 }
-/**
- * @brief USART read function to receive data 
- *
- */
+
 char USART_Read(){
     /*Wait for dataavailability*/
     while(!(UCSR0A & (1<<RXC0))){
@@ -26,11 +19,7 @@ char USART_Read(){
     }
     return UDR0;
 }
-/**
- * @brief USART write function to write (transmit) data.
- *
- * @param temp the temperature that is to be communicated
- */
+
 void USART_Write(uint16_t temp){
     if(temp>=0 && temp<=200){
         unsigned char temperature[] = "Temperature is 20 degree Celsius"; /*duty cycle=20%*/

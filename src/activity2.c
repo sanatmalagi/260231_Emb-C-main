@@ -15,15 +15,11 @@ void InitADC()
  */
 uint16_t ReadADC(uint8_t c)
 {
-    /*Selecting ADC channel0*/
     ADMUX&=0xf8;
     c=c&0b00000111;
     ADMUX|=c;
-    /*Start  conversion*/
     ADCSRA|=(1<<ADSC);
-    /*Wait for conversion to complete*/
     while(!(ADCSRA & (1<<ADIF)));
-    /*Clear ADIF by writing 1 .*/
     ADCSRA|=(1<<ADIF);
     return(ADC);
 }
